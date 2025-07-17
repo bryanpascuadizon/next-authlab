@@ -16,6 +16,8 @@ A sleek and modern login form built with [ShadCN UI](https://ui.shadcn.com), des
 - [ShadCN UI](https://ui.shadcn.com)
 - [Tailwind CSS](https://tailwindcss.com)
 - [React Icons](https://react-icons.github.io/react-icons/)
+- [Next-Auth](https://next-auth.js.org/)
+- [SCrypt - password hashing](https://nodejs.org/api/crypto.html#crypto_crypto_scrypt_password_salt_keylen_options_callback)
 
 ## 📦 Setup
 
