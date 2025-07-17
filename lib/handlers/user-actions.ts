@@ -33,6 +33,36 @@ export const oauthSignIn = async (provider: string) => {
   }
 };
 
+export const signInCredentials = async (
+  prevState: unknown,
+  formData: FormData
+) => {
+  try {
+    if (!formData.get("email") || !formData.get("password")) {
+      return {
+        success: false,
+        message: "Invalid email or password",
+      };
+    }
+
+    const user = {
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
+
+    await signIn("credentials", user);
+  } catch (error) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
+
+    return {
+      success: false,
+      message: "Invalid email or password",
+    };
+  }
+};
+
 export const SignOut = async () => {
   await signOut();
 };

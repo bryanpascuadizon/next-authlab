@@ -15,7 +15,9 @@ const Dashboard = () => {
   return (
     <>
       <p>Dashboard</p>
-      <Button onClick={handleLogOut}>Logout</Button>
+      <Button className="cursor-pointer" onClick={handleLogOut}>
+        {isLogoutPending ? "Logging out..." : "Logout"}
+      </Button>
     </>
   );
 };

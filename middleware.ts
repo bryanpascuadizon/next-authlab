@@ -1,13 +1,13 @@
 import { getToken } from "next-auth/jwt";
 import { NextResponse, NextRequest } from "next/server";
 
-const authenticationRoutes = ["/api/auth", "/auth"];
 const publicRoutes = ["/sign-in"];
 const protectedPaths = [/^\/dashboard(\/.*)?$/, /^\/profile(\/.*)?$/];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  //handles OAuth routes
   if (pathname.startsWith("/api/auth") || pathname.startsWith("/auth")) {
     return NextResponse.next();
   }

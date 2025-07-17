@@ -1,23 +1,21 @@
 "use client";
 
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "../ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Icons } from "../icons";
-import { googleSignIn, oauthSignIn } from "@/lib/handlers/user-actions";
-import { useTransition } from "react";
+import { oauthSignIn, signInCredentials } from "@/lib/handlers/user-actions";
+import { useActionState, useTransition } from "react";
 
 const SignInForm = () => {
   const [isGooglePending, startGoogleTransition] = useTransition();
   const [isGithubPending, startGithubTransition] = useTransition();
+  const [data, action, isLoginPending] = useActionState(signInCredentials, {
+    success: false,
+    message: "",
+  });
 
   const handleGoogleSignIn = () => {
     const signInGoogle = async () => {
@@ -48,18 +46,28 @@ const SignInForm = () => {
         </CardHeader>
 
         <CardContent className="space-y-4">
-          <form className="flex flex-col gap-3">
+          <form className="flex flex-col gap-3" action={action}>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" />
+              <Input id="email" name="email" type="email" />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" />
+              <Input id="password" name="password" type="password" />
             </div>
 
-            <Button className="w-full cursor-pointer" type="submit">
+            {!data?.success && data?.message && (
+              <p className="space-y-2 text-destructive text-sm text-center">
+                {data.message}
+              </p>
+            )}
+
+            <Button
+              disabled={isLoginPending}
+              className="w-full cursor-pointer"
+              type="submit"
+            >
               Login
             </Button>
           </form>
@@ -76,6 +84,7 @@ const SignInForm = () => {
               variant="outline"
               className="w-full cursor-pointer"
               onClick={handleGoogleSignIn}
+              disabled={isGooglePending}
             >
               <Icons.google className="w-4 h-4 mr-2" />
               {isGooglePending ? "Signing-in..." : "Google"}
@@ -85,6 +94,7 @@ const SignInForm = () => {
               variant="outline"
               className="w-full cursor-pointer"
               onClick={handleGithubSignIn}
+              disabled={isGithubPending}
             >
               <Icons.github className="w-4 h-4 mr-2" />
               {isGithubPending ? "Signing-in..." : "Github"}
