@@ -22,7 +22,7 @@ A minimal authentication sandbox app built with ShadCN UI that supports email/pa
 ## 📦 Setup
 
 ```bash
-git clone https://github.com/bryanpascuadizon/next-authentication.git
+git clone https://github.com/bryanpascuadizon/next-authlab.git
 cd next-authlab
 npm install
 npm run dev
