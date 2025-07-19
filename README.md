@@ -1,6 +1,6 @@
 # 🔐 Auth UI — ShadCN Login Page
 
-A sleek and modern login form built with [ShadCN UI](https://ui.shadcn.com), designed for easy integration with any authentication backend. Includes email/password fields and OAuth support for **Google** and **GitHub**.
+A minimal authentication sandbox app built with ShadCN UI that supports email/password and OAuth login via next-auth providers
 
 ## ✨ Features
 
